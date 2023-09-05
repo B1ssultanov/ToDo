@@ -8,38 +8,13 @@
 	<link rel="stylesheet" href="{% static 'home_style.css' %}" type="text/css" media="all" />
 </head>
 <body>
-{#    <div>#}
-{#        <div>#}
-{#            <h1 style="font-size: 50px"> Предстоит выполнить:</h1>#}
-{#        </div>#}
-{#        <div>#}
-{#            {% for task in tasks %}#}
-{#                <div class="task_block">#}
-{#                    <h1>{{ task.title }}</h1>#}
-{#                    <h2>{{ task.description }}</h2>#}
-{#                    <a href="complete/{{ task.id }}" class="finish">Task Complete</a>#}
-{#                    <br>#}
-{#                    <a href="remove_task/{{ task.id }}" class="remove">Task Remove</a>#}
-{#                    <br>#}
-{#                    <a href="task_details/{{ task.id }}" class="details">Details</a>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#        <div>#}
-{#            <a href="add_task" class="addTask">Add New Task</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div>#}
-{#        <h1 style="color:green; font-size: 50px"> Законченные задачи:</h1>#}
-{#    </div>#}
-{##}
-{#    {% for completed_task in completed_tasks %}#}
-{#        <div class="completed_task_block">#}
-{#            <h1>{{ completed_task.title }}</h1>#}
-{#            <h2>{{ completed_task.description }}</h2>#}
-{#            <a href="remove_finished_task/{{ completed_task.id }}" class="remove">Task Remove</a>#}
-{#        </div>#}
-{#    {% endfor %}#}
+    <div>
+        <ul>
+            <li><a href="/" style="font-size: 20px">Home</a></li>
+            <li><a href="/">Sign Up</a></li>
+            <li><a href="/">Sign In</a></li>
+        </ul>
+    </div>
     <div class="page-container">
         <div class="tasks-container">
             <h1 class="section-title">Предстоит выполнить:</h1>

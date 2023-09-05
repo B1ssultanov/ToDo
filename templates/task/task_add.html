@@ -53,14 +53,6 @@
     </style>
 </head>
 <body>
-{#    <form method="POST">#}
-{#        {% csrf_token %}#}
-{#        <p>Название задачи: {{ form.title }}</p>#}
-{#        <p>Автор: {{ form.author }}</p>#}
-{#        <p>Описание: {{ form.description }}</p>#}
-{#        <p>Дата для выполнения: {{ form.date }}</p>#}
-{#        <button type="submit">Save Changes</button>#}
-{#    </form>#}
     <div class="form-container">
         <form method="POST" class="task-form">
             {% csrf_token %}
