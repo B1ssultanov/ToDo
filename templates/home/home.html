@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{% static 'home_style.css' %}" type="text/css" media="all" />
+</head>
+<body>
+{#    <div>#}
+{#        <div>#}
+{#            <h1 style="font-size: 50px"> Предстоит выполнить:</h1>#}
+{#        </div>#}
+{#        <div>#}
+{#            {% for task in tasks %}#}
+{#                <div class="task_block">#}
+{#                    <h1>{{ task.title }}</h1>#}
+{#                    <h2>{{ task.description }}</h2>#}
+{#                    <a href="complete/{{ task.id }}" class="finish">Task Complete</a>#}
+{#                    <br>#}
+{#                    <a href="remove_task/{{ task.id }}" class="remove">Task Remove</a>#}
+{#                    <br>#}
+{#                    <a href="task_details/{{ task.id }}" class="details">Details</a>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div>#}
+{#            <a href="add_task" class="addTask">Add New Task</a>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div>#}
+{#        <h1 style="color:green; font-size: 50px"> Законченные задачи:</h1>#}
+{#    </div>#}
+{##}
+{#    {% for completed_task in completed_tasks %}#}
+{#        <div class="completed_task_block">#}
+{#            <h1>{{ completed_task.title }}</h1>#}
+{#            <h2>{{ completed_task.description }}</h2>#}
+{#            <a href="remove_finished_task/{{ completed_task.id }}" class="remove">Task Remove</a>#}
+{#        </div>#}
+{#    {% endfor %}#}
+    <div class="page-container">
+        <div class="tasks-container">
+            <h1 class="section-title">Предстоит выполнить:</h1>
+            <div class="tasks-list">
+                {% for task in tasks %}
+                    <div class="task-block">
+                        <h2>{{ task.title }}</h2>
+                        <p>{{ task.description }}</p>
+                        <div class="task-actions">
+                            <a href="complete/{{ task.id }}" class="button finish">Task Complete</a>
+                            <a href="remove_task/{{ task.id }}" class="button remove">Task Remove</a>
+                            <a href="task_details/{{ task.id }}" class="button details">Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="add_task" class="add-task-button">Add New Task</a>
+        </div>
+
+        <div class="completed-tasks-container">
+            <h1 class="section-title" style="color: green;">Законченные задачи:</h1>
+            <div class="completed-tasks-list">
+                {% for completed_task in completed_tasks %}
+                    <div class="completed-task-block">
+                        <h2>{{ completed_task.title }}</h2>
+                        <p>{{ completed_task.description }}</p>
+                        <a href="remove_finished_task/{{ completed_task.id }}" class="button remove">Task Remove</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

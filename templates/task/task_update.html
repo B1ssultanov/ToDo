@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task_update</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <p>{{ form.title }}</p>
+        <p>{{ form.author }}</p>
+        <p>{{ form.description }}</p>
+        <p>{{ form.date }}</p>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
