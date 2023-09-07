@@ -11,8 +11,8 @@
     <div>
         <ul>
             <li><a href="/" style="font-size: 20px">Home</a></li>
-            <li><a href="/">Sign Up</a></li>
-            <li><a href="/">Sign In</a></li>
+            <li><a href="signUp">Sign Up</a></li>
+            <li><a href="signIn">Sign In</a></li>
         </ul>
     </div>
     <div class="page-container">
@@ -20,15 +20,17 @@
             <h1 class="section-title">Предстоит выполнить:</h1>
             <div class="tasks-list">
                 {% for task in tasks %}
-                    <div class="task-block">
-                        <h2>{{ task.title }}</h2>
-                        <p>{{ task.description }}</p>
-                        <div class="task-actions">
-                            <a href="complete/{{ task.id }}" class="button finish">Task Complete</a>
-                            <a href="remove_task/{{ task.id }}" class="button remove">Task Remove</a>
-                            <a href="task_details/{{ task.id }}" class="button details">Details</a>
+                    {% if task.user_id.id == user_id %}
+                        <div class="task-block">
+                            <h2>{{ task.title }}</h2>
+                            <p>{{ task.description }}</p>
+                            <div class="task-actions">
+                                <a href="complete/{{ task.id }}" class="button finish">Task Complete</a>
+                                <a href="remove_task/{{ task.id }}" class="button remove">Task Remove</a>
+                                <a href="task_details/{{ task.id }}" class="button details">Details</a>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <a href="add_task" class="add-task-button">Add New Task</a>
@@ -38,15 +40,16 @@
             <h1 class="section-title" style="color: green;">Законченные задачи:</h1>
             <div class="completed-tasks-list">
                 {% for completed_task in completed_tasks %}
-                    <div class="completed-task-block">
-                        <h2>{{ completed_task.title }}</h2>
-                        <p>{{ completed_task.description }}</p>
-                        <a href="remove_finished_task/{{ completed_task.id }}" class="button remove">Task Remove</a>
-                    </div>
+                    {% if completed_task.user_id.id == user_id %}
+                        <div class="completed-task-block">
+                            <h2>{{ completed_task.title }}</h2>
+                            <p>{{ completed_task.description }}</p>
+                            <a href="remove_finished_task/{{ completed_task.id }}" class="button remove">Task Remove</a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
-
 </body>
 </html>

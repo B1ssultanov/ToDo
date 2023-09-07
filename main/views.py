@@ -1,10 +1,20 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.views import View
 
-from main.forms import TaskEditForm
-from main.models import List, Complete
+from main.forms import TaskEditForm, RegistrationForm, LoginForm
+from main.models import List, Complete, Users
 
+from rest_framework import viewsets
+from .serializers import ListSerializer
+
+user_id = 0
+
+class ListViewSet(viewsets.ModelViewSet):
+    queryset = List.objects.all()
+    serializer_class = ListSerializer
 
 class MainView(View):
     """Вывод Задач"""
@@ -13,7 +23,8 @@ class MainView(View):
         tasks = List.objects.all()
         completed_tasks = Complete.objects.all()
         return render(request, 'home/home.html', {'tasks': tasks,
-                                                  'completed_tasks': completed_tasks})
+                                                  'completed_tasks': completed_tasks,
+                                                  'user_id': user_id})
 
 class CompleteView(View):
     """Успешное окончание задачи"""
@@ -62,6 +73,7 @@ class TaskDetailView(View):
 class AddTaskView(View):
     def get(self, request):
         form = TaskEditForm()
+        form.user_id = user_id
         return render(request, 'task/task_add.html', {'form': form})
 
     def post(self, request):
@@ -72,3 +84,33 @@ class AddTaskView(View):
             return redirect('/')
         else:
             raise ValidationError
+
+
+def SignUp(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            user = form.save()
+            user_id = form.auto_id
+            return redirect('/')
+    else:
+        form = RegistrationForm()
+    return render(request, 'home/authorization/signUp.html', {'form': form})
+
+
+def SignIn(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = Users.objects.get(email=email)
+            if user is not None:
+                global user_id
+                user_id = user.id
+                return redirect('/')
+            else:
+                form.add_error(None, 'Invalid username or password')
+    elif request.method == 'GET':
+        form = AuthenticationForm()
+    return render(request, 'home/authorization/signIn.html', {'form': form})

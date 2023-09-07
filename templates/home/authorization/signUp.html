@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>::-webkit-scrollbar { width: 0;}</style>
+
+    <style>
+        body{
+            font-family: 'PT Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.428571429;
+            font-weight: 400;
+            color: azure;
+
+            background-color: rgb(31, 30, 30);
+            background-size: cover;
+
+            font-family: 'Droid Serif', serif;
+        }
+        .registration{
+            width:350px;
+            padding: 2rem 1rem;
+            margin:90px auto;
+            background: rgba(39, 37, 43, 0.5);
+            color: black;
+            border-radius: 35px;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0. 1);
+             background: rgb(48, 47, 47);
+        }
+        h2{
+            font-size: 4rem;
+            color: rgb(242, 242, 242);
+            margin-bottom: 1.2rem;
+            font-family: 'Montserrat', sans-serif;;
+        }
+        form input{
+            width: 92%;
+            outline: none;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            background: rgb(233, 234, 238);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        button{
+            font-size: 1rem;
+            margin-top: 1.8rem;
+            padding: 10px 0;
+            border-radius: 20px;
+            outline: none;
+            border:none;
+            font-size: 20px;
+            width: 90%;
+            color:white;
+            cursor: pointer;
+            background: rgb(233, 77, 69);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        button:hover{
+            background: rgb(192, 70, 18);
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+        <div class="registration">
+            <h2>Sign Up</h2>
+            <form method="POST" class="input">
+                {% csrf_token %}
+                    <input  placeholder="name"  {{ form.name }}
+                    <input  placeholder="surname"  {{ form.surname }}
+                    <input  placeholder="email"  {{ form.email }} 
+                    <input  placeholder="phone"  {{ form.phone }}
+                    <input  placeholder="password" {{ form.password }}
+                <button>Sign Up</button>
+            </form>
+        </div>
+    {% endblock %}
+</body>
+</html>

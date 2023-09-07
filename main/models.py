@@ -8,7 +8,7 @@ class Users(models.Model):
     phone    = models.IntegerField('phone')
     name     = models.CharField('Name', max_length=100)
     surname  = models.CharField('Surname', max_length=100)
-    birthday = models.DateField('birthday')
+    password = models.CharField('password', max_length=100)
 
     def __str__(self):
         return f'{self.name} {self.surname}'
@@ -35,6 +35,7 @@ class List(models.Model):
 
 class Complete(models.Model):
     ''''Данные о Задачах'''
+    user_id     = models.ForeignKey(Users, on_delete=models.CASCADE)
     title       = models.CharField('Заголовок Задачи', max_length=100)
     description = models.TextField('Текст задачи')
     author      = models.CharField('Имя автора', max_length=100)

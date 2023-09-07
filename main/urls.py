@@ -15,10 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from main.views import MainView, CompleteView, DeleteView, EditView, TaskDetailView, AddTaskView
+from rest_framework import routers
+
+from main.views import *
+
+router = routers.DefaultRouter()
+router.register(r'todo', ListViewSet)
 
 urlpatterns = [
     path('',                                   MainView.as_view()),
@@ -28,5 +33,10 @@ urlpatterns = [
     path('edit_task/<int:task_id>',            EditView.as_view()),
     path('task_details/<int:task_id>',         TaskDetailView.as_view()),
     path('add_task',                           AddTaskView.as_view()),
+
+    path('signUp',                             SignUp, name='signUp'),
+    path('signIn',                             SignIn, name='signIn'),
+
+    path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
